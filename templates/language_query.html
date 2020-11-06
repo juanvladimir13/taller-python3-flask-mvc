@@ -1,0 +1,56 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+Language find
+{% endblock %}
+
+{% block content %}
+<h1>Language List</h1>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Version</th>
+    <th scope="col">Year</th>
+    <th scope="col"></th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for key in database %}
+  {% for column in database[key] %}
+
+  <tr>
+    <td>{{column[1]}}</td>
+    <td>{{column[0]}}</td>
+    <td><a href="{{ url_for('language', language=key, year=column[0] )}}">View</a></td>
+  </tr>
+  {% endfor %}
+  {% endfor %}
+  </tbody>
+</table>
+
+<br>
+<hr>
+
+<h1>Language find</h1>
+<br>
+<form action="{{ url_for('language_query')}}" method="get">
+  <div class="form-row">
+    <div class="form-group col-md-8">
+      <label for="language">Language select</label>
+      <select class="form-control" id="language" name="language">
+        <option value="php">PHP</option>
+        <option value="python">Python</option>
+      </select>
+
+    </div>
+    <div class="form-group col-md-4">
+      <label for="year">Year select</label>
+      <select class="form-control" id="year" name="year">
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+      </select>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Send</button>
+</form>
+{% endblock %}
