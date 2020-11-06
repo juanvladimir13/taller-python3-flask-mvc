@@ -6,14 +6,12 @@
 
 {% block content %}
 <h2>User</h2>
-<h3>@{{ user_name }}</h3>
+{{ username | safe }}
 <br>
 
 <h1>Leguajes de programacion</h1>
 <ul class="list-group">
-  {% for skill in skills %}
-  <li class="list-group-item">{{ skill }}</li>
-  {% endfor %}
+  {{ languages | safe }}
 </ul>
 <br>
 

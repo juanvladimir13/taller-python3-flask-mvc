@@ -5,6 +5,6 @@ Language version
 {% endblock %}
 
 {% block content %}
-<h1>{{ language_version }}</h1>
-<h1>{{ year }}</h1>
+{{ language | safe }}
+{{ year | safe }}
 {% endblock %}

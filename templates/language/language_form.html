@@ -15,16 +15,7 @@ Language find
   </tr>
   </thead>
   <tbody>
-  {% for key in database %}
-  {% for column in database[key] %}
-
-  <tr>
-    <td>{{column[1]}}</td>
-    <td>{{column[0]}}</td>
-    <td><a href="{{ url_for('language', language=key, year=column[0] )}}">View</a></td>
-  </tr>
-  {% endfor %}
-  {% endfor %}
+  {{ languages | safe }}
   </tbody>
 </table>
 
@@ -33,7 +24,7 @@ Language find
 
 <h1>Language find</h1>
 <br>
-<form action="{{ url_for('language_query')}}" method="get">
+<form action="{{ url_for('language_params')}}" method="get">
   <div class="form-row">
     <div class="form-group col-md-8">
       <label for="language">Language select</label>
