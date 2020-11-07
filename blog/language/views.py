@@ -7,16 +7,19 @@ class LanguageView:
         self.template = 'language/language.html'
 
     def language_version(self, language):
-        return '<h1>%s</h1>' % (language)
+        return '<h1>' + language + '</h1>'
 
     def year_show(self, year):
-        return '<h1>%s</h1>' % (year)
+        return '<h1>' + str(year) + '</h1>'
 
-    def render(self, language, year):
-        context = {
-            'language': self.language_version(language),
-            'year': self.year_show(year)
-        }
+    def render(self, language='', year=''):
+        if not language or not year:
+            context = {'message': '<h1>Dato no encontrado</h1>'}
+        else:
+            context = {
+                'language': self.language_version(language),
+                'year': self.year_show(year)
+            }
         return render_template(self.template, **context)
 
 
@@ -32,11 +35,11 @@ class LanguageFormView:
                 detail_view = url_for('language_pretty', language=key, year=year)
                 tr += '''
                 <tr>
-                  <td>%s</td>
-                  <td>%s</td>
-                  <td><a href="%s">View</a></td>
+                    <td>{version}</td>
+                    <td>{year}</td>
+                    <td><a href="{detail_view}">View</a></td>
                 </tr>
-                ''' %(version, year, detail_view)
+                '''.format(version=version, year=year, detail_view=detail_view)
         return tr
 
     def render(self, languages):

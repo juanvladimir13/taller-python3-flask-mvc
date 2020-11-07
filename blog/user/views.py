@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from flask import render_template
 
 
@@ -10,15 +9,18 @@ class UserView(object):
     def language_list(self, languages):
         li = ''
         for language in languages:
-            li += '<li class ="list-group-item" >%s</li>' % (language)
+            li += '<li class ="list-group-item" >' + language + '</li>'
         return li
 
     def username_line(self, username):
-        return '<h3>%s</h3>' % (username)
+        return '<h3>' + username + '</h3>'
 
-    def render(self, username,languages):
+    def render_contact(self):
+        return render_template('user/contact.html')
+
+    def render(self, username, skills):
         context = {
             'username': self.username_line(username),
-            'languages': self.language_list(languages)
+            'skills': self.language_list(skills)
         }
         return render_template(self.template, **context)

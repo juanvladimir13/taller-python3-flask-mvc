@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from flask import render_template, request, redirect, url_for
-from .views import UserView
+from flask import request, redirect, url_for
+
 from .models import USERNAME, SKILLS
+from .views import UserView
 
 
 class UserController:
@@ -10,16 +11,18 @@ class UserController:
         self.view = UserView()
 
     def index(self):
-        return self.view.render(username=USERNAME, languages=SKILLS)
+        return self.view.render(USERNAME, SKILLS)
 
     def contact(self):
         if request.method == 'GET':
-            return render_template('user/contact.html')
+            return self.view.render_contact()
 
         if request.method == 'POST':
             email = request.form['email']
             full_name = request.form['full_name']
             whatsapp = request.form['whatsapp']
             message = request.form['message']
+
             print(email, full_name, whatsapp, message)
+
             return redirect(url_for('home'))
